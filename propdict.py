@@ -1,5 +1,5 @@
 def dictproperty(method):
-    method.in_dict = True
+    method.__dictproperty__ = True
     return method
 
 
@@ -8,7 +8,7 @@ class propdict(dict):
     def __new__(cls, **kw):
         cls.__dict_properties__ = set()
         for name, method in cls.__dict__.iteritems():
-            if hasattr(method, "in_dict"):
+            if hasattr(method, "__dictproperty__"):
                 cls.__dict_properties__.add(name)
         return dict.__new__(cls, **kw)
 
@@ -46,7 +46,7 @@ class propdict(dict):
             return dict.__getitem__(self, name)
         except KeyError:
             item = object.__getattribute__(self, name)
-            if name != '__dict_properties__' and name in self.__dict_properties__:
+            if hasattr(item, "__dictproperty__"):
                 return item()
             else:
                 return item
