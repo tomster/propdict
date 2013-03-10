@@ -1,5 +1,3 @@
-
-
 def dictproperty(method):
     method.in_dict = True
     return method
@@ -8,18 +6,18 @@ def dictproperty(method):
 class propdict(dict):
 
     def __new__(cls, **kw):
-        cls.dict_properties = set()
+        cls.__dict_properties__ = set()
         for name, method in cls.__dict__.iteritems():
             if hasattr(method, "in_dict"):
-                cls.dict_properties.add(name)
+                cls.__dict_properties__.add(name)
         return dict.__new__(cls, **kw)
 
     def __init__(self, **config):
         for key, value in config.pop('host').items():
             self[key] = value
-        for name, method in self.__dict__.iteritems():
-            if hasattr(method, "in_dict"):
-                self.dict_properties.add(name)
+
+    def __contains__(self, name):
+        return name in self.keys()
 
     def __getitem__(self, key):
         if key in dict.keys(self):
@@ -28,14 +26,13 @@ class propdict(dict):
             return getattr(self, key)
 
     def keys(self):
-        dict_keys = dict.keys(self)
-        return list(set(dict_keys).union(self.dict_properties))
+        return list(set(dict.keys(self)).union(self.__dict_properties__))
 
     @property
     def __dict__(self):
         result = self
-        for propkey in self.dict_properties:
-            if propkey not in self:  # dict values take precedence
+        for propkey in self.__dict_properties__:
+            if propkey not in dict.keys(self):  # dict values take precedence
                 result[propkey] = self[propkey]()
         return result
 
@@ -48,4 +45,8 @@ class propdict(dict):
         try:
             return dict.__getitem__(self, name)
         except KeyError:
-            return object.__getattribute__(self, name)
+            item = object.__getattribute__(self, name)
+            if name != '__dict_properties__' and name in self.__dict_properties__:
+                return item()
+            else:
+                return item
