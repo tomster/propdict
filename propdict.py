@@ -1,8 +1,8 @@
 
 
-def dictproperty(what):
-    what.in_dict = True
-    return what
+def dictproperty(method):
+    method.in_dict = True
+    return method
 
 
 class propdict(dict):
@@ -35,7 +35,7 @@ class propdict(dict):
     def __dict__(self):
         result = self
         for propkey in self.dict_properties:
-            if propkey not in self:
+            if propkey not in self:  # dict values take precedence
                 result[propkey] = self[propkey]()
         return result
 
