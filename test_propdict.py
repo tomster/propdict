@@ -131,3 +131,7 @@ def test_getattr(host, netmask):
 def test_setattr(host, netmask):
     setattr(host, 'netmask', u'foo')
     assert host.netmask == u'foo'
+
+
+def test_values(host, netmask):
+    assert netmask in host.values()
