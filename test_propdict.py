@@ -122,3 +122,12 @@ def test_get_property_default(host, netmask):
 
 def test_len(host):
     assert len(host) == 3  # jailzfs + ip_addr + netmask
+
+
+def test_getattr(host, netmask):
+    assert getattr(host, 'netmask') == netmask
+
+
+def test_setattr(host, netmask):
+    setattr(host, 'netmask', u'foo')
+    assert host.netmask == u'foo'
