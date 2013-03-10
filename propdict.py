@@ -29,7 +29,7 @@ class propdict(dict):
         result = self
         for propkey in self.__dict_properties__:
             if propkey not in dict.keys(self):  # dict values take precedence
-                result[propkey] = self[propkey]()
+                result[propkey] = self[propkey]
         return result
 
     def __setattr__(self, name, value):

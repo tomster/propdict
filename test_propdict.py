@@ -55,6 +55,7 @@ def test_property_from_instance(host):
 
 def test_property_in_dict(host):
     assert host['netmask'] == host.netmask
+    assert host.__dict__ == dict(config, netmask='%s 255.255.255.0' % host.ip_addr)
 
 
 def test_prop_keys(host):
@@ -103,4 +104,3 @@ def test_set_builtin_method(host):
 def test_regular_property(host):
     assert 'regular_property' not in host
     assert host.regular_property == '%s regular property' % host.ip_addr
-
