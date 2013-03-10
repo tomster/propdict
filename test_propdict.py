@@ -33,6 +33,11 @@ def host(request):
     return JailHost(**config)
 
 
+@fixture
+def netmask(host):
+    return '%s 255.255.255.0' % host.ip_addr
+
+
 def test_dict_from_class(host):
     assert host['ip_addr'] == config['ip_addr']
 
@@ -53,17 +58,17 @@ def test_property_from_instance(host):
     assert host.ip_addr == config['ip_addr']
 
 
-def test_property_in_dict(host):
+def test_property_in_dict(host, netmask):
     assert host['netmask'] == host.netmask
-    assert host.__dict__ == dict(config, netmask='%s 255.255.255.0' % host.ip_addr)
+    assert host.__dict__ == dict(config, netmask=netmask)
 
 
 def test_prop_keys(host):
     assert 'netmask' in host.keys()
 
 
-def test_property_access(host):
-    assert host.netmask == '%s 255.255.255.0' % host.ip_addr
+def test_property_access(host, netmask):
+    assert host.netmask == netmask
 
 
 def test_as_dict(host):
