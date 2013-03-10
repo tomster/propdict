@@ -71,6 +71,10 @@ def test_property_access(host, netmask):
     assert host.netmask == netmask
 
 
+def test_property_in_items(host, netmask):
+    assert ('netmask', netmask) in host.items()
+
+
 def test_as_dict(host):
     assert 'netmask' in host
     assert host['netmask'] == host.netmask

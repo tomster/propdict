@@ -46,3 +46,6 @@ class propdict(dict):
                 return item()
             else:
                 return item
+
+    def items(self):
+        return [(key, self[key]) for key in self.keys()]
