@@ -11,9 +11,6 @@ class JailHost(propdict):
 
     jailzfs = None
     ip_addr = None
-
-    blueprints = None
-    jails = None
     use_zfs = True
 
     @dictproperty
@@ -113,3 +110,7 @@ def test_set_builtin_method(host):
 def test_regular_property(host):
     assert 'regular_property' not in host
     assert host.regular_property == '%s regular property' % host.ip_addr
+
+
+def test_len(host):
+    assert len(host) == 3  # jailzfs + ip_addr + netmask

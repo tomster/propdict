@@ -49,3 +49,6 @@ class propdict(dict):
 
     def items(self):
         return [(key, self[key]) for key in self.keys()]
+
+    def __len__(self):
+        return len(self.keys())
