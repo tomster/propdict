@@ -133,5 +133,34 @@ def test_setattr(host, netmask):
     assert host.netmask == u'foo'
 
 
+def test_pop(host, netmask):
+    host.netmask = u'foo'
+    assert host.pop('netmask') == u'foo'
+    assert host.netmask == netmask
+    # you cannot pop a property
+    with raises(KeyError):
+        assert host.pop('netmask') == netmask
+
+
+def test_del(host, netmask):
+    host.netmask = u'foo'
+    del host['netmask']
+    assert host.netmask == netmask
+    # you cannot delete a property
+    with raises(KeyError):
+        del host['netmask']
+
+
+def test_post_init_addition(host):
+    host['foo'] = 'bar'
+    assert host.foo == 'bar'
+    assert 'foo' in host
+
+
+def test_update(host, netmask):
+    host.update(netmask=u'foo')
+    assert host.netmask == u'foo'
+
+
 def test_values(host, netmask):
     assert netmask in host.values()
