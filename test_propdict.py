@@ -1,5 +1,5 @@
 from pytest import fixture
-from propdict import propdict
+from propdict import propdict, indict, class_decorator
 
 config = {
     'host': {
@@ -12,6 +12,7 @@ config = {
 }
 
 
+@class_decorator
 class JailHost(propdict):
 
     jailzfs = None
@@ -21,7 +22,7 @@ class JailHost(propdict):
     jails = None
     use_zfs = True
 
-    @property
+    @indict
     def netmask(self):
         return '%s 255.255.255.0' % self.ip_addr
 
@@ -53,8 +54,16 @@ def test_property_from_instance(host):
 
 def test_property_in_dict(host):
     assert host['netmask'] == host.netmask
-    # assert 'netmask' in host.keys()
+
+
+def test_prop_keys(host):
+    assert 'netmask' in host.keys()
 
 
 def test_property_access(host):
-    assert host.netmask == '%s 255.255.255.0' % host.ip_addr
+    assert host.netmask() == '%s 255.255.255.0' % host.ip_addr
+
+
+def test_as_dict(host):
+    assert 'netmask' in host.as_dict()
+    assert host.as_dict()['netmask'] == host.netmask
