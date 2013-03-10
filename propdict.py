@@ -1,6 +1,6 @@
 
 
-def indict(what):
+def dictproperty(what):
     what.in_dict = True
     return what
 

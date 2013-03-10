@@ -1,5 +1,5 @@
 from pytest import fixture
-from propdict import propdict, indict
+from propdict import propdict, dictproperty
 
 config = {
     'host': {
@@ -21,7 +21,7 @@ class JailHost(propdict):
     jails = None
     use_zfs = True
 
-    @indict
+    @dictproperty
     def netmask(self):
         return '%s 255.255.255.0' % self.ip_addr
 
