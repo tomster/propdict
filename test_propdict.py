@@ -199,3 +199,11 @@ def test_not_equal_not_propdict(host, netmask):
         'netmask': netmask,
         'ip_addr': host.ip_addr,
         'jailzfs': host.jailzfs}
+
+
+def test_copy(host, netmask):
+    copy = host.copy()
+    assert copy == host
+    copy['netmask'] = u'new'
+    assert host['netmask'] != copy['netmask']
+    assert copy != host

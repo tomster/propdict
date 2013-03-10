@@ -80,3 +80,9 @@ class propdict(dict):
             if other[key] != value:
                 return False
         return True
+
+    def copy(self):
+        copy = self.__class__()
+        for key in dict.keys(self):
+            copy[key] = self[key]
+        return copy
