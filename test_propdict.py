@@ -1,5 +1,5 @@
 from pytest import fixture
-from propdict import propdict, indict, class_decorator
+from propdict import propdict, indict
 
 config = {
     'host': {
@@ -12,7 +12,6 @@ config = {
 }
 
 
-@class_decorator
 class JailHost(propdict):
 
     jailzfs = None

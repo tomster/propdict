@@ -1,19 +1,18 @@
 
 
-def class_decorator(cls):
-    cls.dict_properties = set()
-    for name, method in cls.__dict__.iteritems():
-        if hasattr(method, "in_dict"):
-            cls.dict_properties.add(name)
-    return cls
-
-
 def indict(what):
     what.in_dict = True
     return what
 
 
 class propdict(dict):
+
+    def __new__(cls, **kw):
+        cls.dict_properties = set()
+        for name, method in cls.__dict__.iteritems():
+            if hasattr(method, "in_dict"):
+                cls.dict_properties.add(name)
+        return dict.__new__(cls, **kw)
 
     def __init__(self, **config):
         for key, value in config.pop('host').items():
