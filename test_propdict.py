@@ -112,5 +112,13 @@ def test_regular_property(host):
     assert host.regular_property == '%s regular property' % host.ip_addr
 
 
+def test_get_property(host, netmask):
+    assert host.get('netmask', None) == netmask
+
+
+def test_get_property_default(host, netmask):
+    assert host.get('netmask-extra', None) is None
+
+
 def test_len(host):
     assert len(host) == 3  # jailzfs + ip_addr + netmask

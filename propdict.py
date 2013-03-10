@@ -52,3 +52,9 @@ class propdict(dict):
 
     def __len__(self):
         return len(self.keys())
+
+    def get(self, key, default=None):
+        try:
+            return self[key]
+        except AttributeError:
+            return default
