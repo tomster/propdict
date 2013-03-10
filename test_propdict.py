@@ -57,7 +57,6 @@ def test_property_from_instance(host):
 
 def test_property_in_dict(host, netmask):
     assert host['netmask'] == host.netmask
-    assert host.__dict__ == dict(config, netmask=netmask)
 
 
 def test_prop_keys(host):
@@ -172,3 +171,31 @@ def test_has_key(host):
 
 def test_repr(host):
     assert host.__repr__() == u'''propdict({'jailzfs': 'jails/ezjail', 'netmask': '127.0.0.2 255.255.255.0', 'ip_addr': '127.0.0.2'})'''
+
+
+def test_is_equal(host, netmask):
+    assert host == JailHost(**{
+        'netmask': netmask,
+        'ip_addr': host.ip_addr,
+        'jailzfs': host.jailzfs})
+
+
+def test_not_equal_missing(host, netmask):
+    assert host != JailHost(**{
+        'netmask': netmask,
+        'jailzfs': host.jailzfs})
+
+
+def test_not_equal_extra(host, netmask):
+    assert host != JailHost(**{
+        'netmask': netmask,
+        'ip_addr': host.ip_addr,
+        'extra': 'extra',
+        'jailzfs': host.jailzfs})
+
+
+def test_not_equal_not_propdict(host, netmask):
+    assert host != {
+        'netmask': netmask,
+        'ip_addr': host.ip_addr,
+        'jailzfs': host.jailzfs}

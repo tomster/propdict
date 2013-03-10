@@ -67,3 +67,16 @@ class propdict(dict):
     def __repr__(self):
         r = ["{0!r}: {1!r}".format(k, v) for k, v in self.items()]
         return "propdict({" + ", ".join(r) + "})"
+
+    def __ne__(self, other):
+        return not self.__eq__(other)
+
+    def __eq__(self, other):
+        if not isinstance(other, self.__class__):
+            return False
+        if set(self.keys()) != set(other.keys()):
+            return False
+        for key, value in self.items():
+            if other[key] != value:
+                return False
+        return True
