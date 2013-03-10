@@ -32,12 +32,16 @@ class propdict(dict):
         dict_keys = dict.keys(self)
         return list(set(dict_keys).union(self.dict_properties))
 
-    def as_dict(self):
+    @property
+    def __dict__(self):
         result = self
         for propkey in self.dict_properties:
             if propkey not in self:
                 result[propkey] = self[propkey]()
         return result
+
+    def __setattr__(self, name, value):
+        self[name] = value
 
     def __getattribute__(self, name):
         try:

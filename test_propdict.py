@@ -26,6 +26,9 @@ class JailHost(propdict):
     def netmask(self):
         return '%s 255.255.255.0' % self.ip_addr
 
+    def notindict(self):
+        return '%s is not in the dictionary representation' % self.ip_addr
+
 
 @fixture
 def host(request):
@@ -61,9 +64,25 @@ def test_prop_keys(host):
 
 
 def test_property_access(host):
-    assert host.netmask() == '%s 255.255.255.0' % host.ip_addr
+    assert host.netmask == '%s 255.255.255.0' % host.ip_addr
 
 
 def test_as_dict(host):
-    assert 'netmask' in host.as_dict()
-    assert host.as_dict()['netmask'] == host.netmask
+    assert 'netmask' in host
+    assert host['netmask'] == host.netmask
+
+
+def test_methods_not_in_dict(host):
+    assert 'notindict' not in host
+
+
+def test_set_attribute(host):
+    host.ip_addr = u'foo'
+    assert host.ip_addr == u'foo'
+    assert host['ip_addr'] == u'foo'
+
+
+def test_set_property(host):
+    host.netmask = u'foo'
+    assert host.netmask == u'foo'
+    assert host['netmask'] == u'foo'
