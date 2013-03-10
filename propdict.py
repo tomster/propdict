@@ -40,6 +40,8 @@ class propdict(dict):
         return result
 
     def __setattr__(self, name, value):
+        if name in dir(self) and not name in self.keys():
+            raise TypeError("cannot overwrite existing method")
         self[name] = value
 
     def __getattribute__(self, name):
