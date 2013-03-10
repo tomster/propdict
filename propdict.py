@@ -12,10 +12,6 @@ class propdict(dict):
                 cls.__dict_properties__.add(name)
         return dict.__new__(cls, **kw)
 
-    def __init__(self, **config):
-        for key, value in config.items():
-            self[key] = value
-
     def __contains__(self, name):
         return name in self.keys()
 
