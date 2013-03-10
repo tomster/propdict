@@ -2,13 +2,8 @@ from pytest import fixture, raises
 from propdict import propdict, dictproperty
 
 config = {
-    'host': {
-        'jailzfs': 'jails/ezjail',
-        'ip_addr':  '127.0.0.2',
-    },
-    'cleanser': {
-        'user': 'cleanser',
-    }
+    'jailzfs': 'jails/ezjail',
+    'ip_addr':  '127.0.0.2',
 }
 
 
@@ -39,7 +34,7 @@ def host(request):
 
 
 def test_dict_from_class(host):
-    assert host['ip_addr'] == config['host']['ip_addr']
+    assert host['ip_addr'] == config['ip_addr']
 
 
 def test_property_from_class(host):
@@ -48,14 +43,14 @@ def test_property_from_class(host):
 
 def test_property_from_class_override():
     no_zfs = config.copy()
-    no_zfs['host']['use_zfs'] = False
+    no_zfs['use_zfs'] = False
     host = JailHost(**no_zfs)
     assert not host['use_zfs']
     assert not host.use_zfs
 
 
 def test_property_from_instance(host):
-    assert host.ip_addr == config['host']['ip_addr']
+    assert host.ip_addr == config['ip_addr']
 
 
 def test_property_in_dict(host):

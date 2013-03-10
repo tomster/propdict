@@ -13,7 +13,7 @@ class propdict(dict):
         return dict.__new__(cls, **kw)
 
     def __init__(self, **config):
-        for key, value in config.pop('host').items():
+        for key, value in config.items():
             self[key] = value
 
     def __contains__(self, name):
