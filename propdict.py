@@ -15,6 +15,8 @@ class propdict(dict):
     def __contains__(self, name):
         return name in self.keys()
 
+    has_key = __contains__
+
     def __getitem__(self, key):
         if key in dict.keys(self):
             return dict.__getitem__(self, key)

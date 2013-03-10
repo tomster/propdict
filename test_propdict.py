@@ -164,3 +164,7 @@ def test_update(host, netmask):
 
 def test_values(host, netmask):
     assert netmask in host.values()
+
+
+def test_has_key(host):
+    assert host.has_key('netmask')
