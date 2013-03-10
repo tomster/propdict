@@ -168,3 +168,7 @@ def test_values(host, netmask):
 
 def test_has_key(host):
     assert host.has_key('netmask')
+
+
+def test_repr(host):
+    assert host.__repr__() == u'''propdict({'jailzfs': 'jails/ezjail', 'netmask': '127.0.0.2 255.255.255.0', 'ip_addr': '127.0.0.2'})'''

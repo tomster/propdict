@@ -63,3 +63,7 @@ class propdict(dict):
             return self[key]
         except AttributeError:
             return default
+
+    def __repr__(self):
+        r = ["{0!r}: {1!r}".format(k, v) for k, v in self.items()]
+        return "propdict({" + ", ".join(r) + "})"
