@@ -75,6 +75,10 @@ def test_methods_not_in_dict(host):
     assert 'notindict' not in host
 
 
+def test_method_access(host):
+    assert host.notindict() == '%s is not in the dictionary representation' % host.ip_addr
+
+
 def test_set_attribute(host):
     host.ip_addr = u'foo'
     assert host.ip_addr == u'foo'
