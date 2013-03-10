@@ -28,6 +28,10 @@ class JailHost(propdict):
     def notindict(self):
         return '%s is not in the dictionary representation' % self.ip_addr
 
+    @property
+    def regular_property(self):
+        return '%s regular property' % self.ip_addr
+
 
 @fixture
 def host(request):
@@ -99,3 +103,9 @@ def test_set_method(host):
 def test_set_builtin_method(host):
     with raises(TypeError):
         host.__getattribute__ = u'foo'
+
+
+def test_regular_property(host):
+    assert 'regular_property' not in host
+    assert host.regular_property == '%s regular property' % host.ip_addr
+
