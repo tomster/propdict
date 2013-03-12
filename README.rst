@@ -1,4 +1,47 @@
-A Python dictionary implementation that supports properties.
+A Python dictionary implementation that supports properties::
+
+    >>> from propdict import propdict, dictproperty
+    >>> class Host(propdict):
+    ...     ip_addr = None
+    ...     use_zfs = True
+    ...     @dictproperty
+    ...     def netmask(self):
+    ...         return '%s 255.255.255.0' % self.ip_addr
+
+
+    >>> foo = Host(ip_addr='10.0.0.1')
+    >>> foo
+    propdict({'netmask': '10.0.0.1 255.255.255.0', 'ip_addr': '10.0.0.1'})
+
+This behaves just like a dictionary, for example you can pass it to any template::
+
+    >>> rc_conf = '''hostname = %(ip_addr)s
+    ... netmask = %(netmask)s'''
+    >>> print rc_conf % foo
+    hostname = 10.0.0.1
+    netmask = 10.0.0.1 255.255.255.0
+
+
+You can access values as properties or with the dict notation::
+
+    >>> foo.ip_addr
+    '10.0.0.1'
+    >>> foo['ip_addr']
+    '10.0.0.1'
+
+And also properties (if you decorated them with ``@dictproperty``)::
+
+    >>> foo['netmask']
+    '10.0.0.1 255.255.255.0'
+    >>> foo.netmask
+    '10.0.0.1 255.255.255.0'
+
+But you can also override properties by setting them::
+
+    >>> foo.netmask = u'foo mask'
+    >>> foo
+    propdict({'netmask': u'foo mask', 'ip_addr': '10.0.0.1'})
+
 
 TODO
 ====
