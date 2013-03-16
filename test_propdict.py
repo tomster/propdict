@@ -1,5 +1,5 @@
 from pytest import fixture, raises
-from propdict import propdict, dictproperty
+from propdict import propdict
 
 config = {
     'jailzfs': 'jails/ezjail',
@@ -13,16 +13,12 @@ class JailHost(propdict):
     ip_addr = None
     use_zfs = True
 
-    @dictproperty
+    @property
     def netmask(self):
         return '%s 255.255.255.0' % self.ip_addr
 
     def notindict(self):
         return '%s is not in the dictionary representation' % self.ip_addr
-
-    @property
-    def regular_property(self):
-        return '%s regular property' % self.ip_addr
 
 
 @fixture
@@ -71,9 +67,15 @@ def test_property_in_items(host, netmask):
     assert ('netmask', netmask) in host.items()
 
 
-def test_as_dict(host):
+def test_property_as_dict(host):
     assert 'netmask' in host
     assert host['netmask'] == host.netmask
+
+
+def test_class_variable_as_dict(host):
+    assert 'use_zfs' in host.keys()
+    assert 'use_zfs' in host
+    assert host['use_zfs'] == host.use_zfs
 
 
 def test_methods_not_in_dict(host):
@@ -106,11 +108,6 @@ def test_set_builtin_method(host):
         host.__getattribute__ = u'foo'
 
 
-def test_regular_property(host):
-    assert 'regular_property' not in host
-    assert host.regular_property == '%s regular property' % host.ip_addr
-
-
 def test_get_property(host, netmask):
     assert host.get('netmask', None) == netmask
 
@@ -120,7 +117,7 @@ def test_get_property_default(host, netmask):
 
 
 def test_len(host):
-    assert len(host) == 3  # jailzfs + ip_addr + netmask
+    assert len(host) == 4  # jailzfs + ip_addr + use_zfs + netmask
 
 
 def test_getattr(host, netmask):
@@ -170,7 +167,7 @@ def test_has_key(host):
 
 
 def test_repr(host):
-    assert host.__repr__() == u'''propdict({'jailzfs': 'jails/ezjail', 'netmask': '127.0.0.2 255.255.255.0', 'ip_addr': '127.0.0.2'})'''
+    assert host.__repr__() == u'''propdict({'ip_addr': '127.0.0.2', 'jailzfs': 'jails/ezjail', 'netmask': '127.0.0.2 255.255.255.0', 'use_zfs': True})'''
 
 
 def test_is_equal(host, netmask):

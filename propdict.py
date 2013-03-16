@@ -1,16 +1,4 @@
-def dictproperty(method):
-    method.__dictproperty__ = True
-    return method
-
-
 class propdict(dict):
-
-    def __new__(cls, **kw):
-        cls.__dict_properties__ = set()
-        for name, method in cls.__dict__.iteritems():
-            if hasattr(method, "__dictproperty__"):
-                cls.__dict_properties__.add(name)
-        return dict.__new__(cls, **kw)
 
     def __contains__(self, name):
         return name in self.keys()
@@ -24,15 +12,11 @@ class propdict(dict):
             return getattr(self, key)
 
     def keys(self):
-        return list(set(dict.keys(self)).union(self.__dict_properties__))
+        return [name for name in dir(self) if not name.startswith('_') and type(getattr(self, name)) in [str, bool, int, float, unicode, dict, list, tuple]]
 
     @property
     def __dict__(self):
-        result = self
-        for propkey in self.__dict_properties__:
-            if propkey not in dict.keys(self):  # dict values take precedence
-                result[propkey] = self[propkey]
-        return result
+        return self
 
     def __setattr__(self, name, value):
         if name in dir(self) and not name in self.keys():

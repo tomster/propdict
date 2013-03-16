@@ -1,17 +1,17 @@
 A Python dictionary implementation that supports properties::
 
-    >>> from propdict import propdict, dictproperty
+    >>> from propdict import propdict
     >>> class Host(propdict):
     ...     ip_addr = None
     ...     use_zfs = True
-    ...     @dictproperty
+    ...     @property
     ...     def netmask(self):
     ...         return '%s 255.255.255.0' % self.ip_addr
 
 
     >>> foo = Host(ip_addr='10.0.0.1')
     >>> foo
-    propdict({'netmask': '10.0.0.1 255.255.255.0', 'ip_addr': '10.0.0.1'})
+    propdict({'netmask': '10.0.0.1 255.255.255.0', 'ip_addr': '10.0.0.1', 'use_zfs': True})
 
 This behaves just like a dictionary, for example you can pass it to any template::
 
@@ -29,7 +29,7 @@ You can access values as properties or with the dict notation::
     >>> foo['ip_addr']
     '10.0.0.1'
 
-And also properties (if you decorated them with ``@dictproperty``)::
+And also properties::
 
     >>> foo['netmask']
     '10.0.0.1 255.255.255.0'
@@ -61,7 +61,7 @@ TODO
 
 - [x] add documentation (examples: string templating)
 - [x] eggify it
-- [ ] support class variables
+- [x] support class variables
 - [ ] support iter(values|items|keys)
 - [ ] travis
 - [ ] check which python versions this actually works on (currently 2.7 tested)
