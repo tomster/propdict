@@ -1,4 +1,13 @@
+from types import NoneType
+
+
 class propdict(dict):
+
+    def __new__(cls, **kw):
+        cls.__dict_keys__ = set([name for name in dir(cls)
+            if not name.startswith('_') and type(getattr(cls, name)) in [
+                str, bool, int, float, unicode, dict, list, tuple, NoneType, property]])
+        return dict.__new__(cls, **kw)
 
     def __contains__(self, name):
         return name in self.keys()
@@ -12,7 +21,7 @@ class propdict(dict):
             return getattr(self, key)
 
     def keys(self):
-        return [name for name in dir(self) if not name.startswith('_') and type(getattr(self, name)) in [str, bool, int, float, unicode, dict, list, tuple]]
+        return list(set(dict.keys(self)).union(self.__dict_keys__))
 
     @property
     def __dict__(self):
