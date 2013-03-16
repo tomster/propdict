@@ -36,11 +36,7 @@ class propdict(dict):
         try:
             return dict.__getitem__(self, name)
         except KeyError:
-            item = object.__getattribute__(self, name)
-            if hasattr(item, "__dictproperty__"):
-                return item()
-            else:
-                return item
+            return object.__getattribute__(self, name)
 
     def items(self):
         return [(key, self[key]) for key in self.keys()]
