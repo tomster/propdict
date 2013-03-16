@@ -43,11 +43,25 @@ But you can also override properties by setting them::
     propdict({'netmask': u'foo mask', 'ip_addr': '10.0.0.1'})
 
 
+Run Tests
+=========
+
+First::
+
+    virtualenv .
+    source bin/activate
+    pip install pytest-cov
+
+Then, to run tests::
+
+    bin/py.test --cov propdict --cov-report html --cov-report term test_propdict.py
+
 TODO
 ====
 
-- [ ] add documentation (examples: string templating)
-- [ ] eggify it
+- [x] add documentation (examples: string templating)
+- [x] eggify it
+- [ ] support class variables
 - [ ] support iter(values|items|keys)
 - [ ] travis
 - [ ] check which python versions this actually works on (currently 2.7 tested)
