@@ -11,7 +11,7 @@ A Python dictionary implementation that supports properties::
 
     >>> foo = Host(ip_addr='10.0.0.1')
     >>> foo
-    propdict({'netmask': '10.0.0.1 255.255.255.0', 'ip_addr': '10.0.0.1', 'use_zfs': True})
+    propdict({'use_zfs': True, 'netmask': '10.0.0.1 255.255.255.0', 'ip_addr': '10.0.0.1'})
 
 This behaves just like a dictionary, for example you can pass it to any template::
 
@@ -40,7 +40,7 @@ But you can also override properties by setting them::
 
     >>> foo.netmask = u'foo mask'
     >>> foo
-    propdict({'netmask': u'foo mask', 'ip_addr': '10.0.0.1'})
+    propdict({'use_zfs': True, 'netmask': u'foo mask', 'ip_addr': '10.0.0.1'})
 
 
 Run Tests
