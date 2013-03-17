@@ -113,11 +113,19 @@ It is noteworthy, though, that you cannot delete properties. However, you *can* 
     KeyError: 'ifconfig'
 
 
+Installation
+============
+
+`propdict` has no dependencies and can simply be installed as an egg using your preferred tool, such as pip, easy_install, buildout, setuptools. You know the drill.
+
+
 Run Tests
 =========
 
-To make sure that ``propdict`` works for your setup, run its tests. You need `py.test <http://pytest.org/latest/>`_, perhaps like so::
+To make sure that ``propdict`` works for your setup, run its tests. You need a checkout from github and `py.test <http://pytest.org/latest/>`_, perhaps like so::
 
+    git clone git@github.com:tomster/propdict
+    cd propdict
     virtualenv .
     source bin/activate
     pip install pytest-cov
@@ -130,13 +138,11 @@ If you made some changes and want to know whether you broke coverage::
 
     bin/py.test --cov propdict --cov-report html --cov-report term test_propdict.py
 
-TODO
-====
 
-- [x] add documentation (examples: string templating)
-- [x] eggify it
-- [x] support class variables
-- [x] support iter(values|items|keys)
-- [x] travis
-- [x] check which python versions this actually works on (currently 2.7 tested)
+Changelog
+=========
 
+0.1a1 - 2013-03-17
+------------------
+
+Initial public release
