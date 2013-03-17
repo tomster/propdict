@@ -9,10 +9,8 @@ class propdict(dict):
                 str, bool, int, float, unicode, dict, list, tuple, NoneType, property]])
         return dict.__new__(cls, **kw)
 
-    def __contains__(self, name):
-        return name in self.keys()
-
-    has_key = __contains__
+    def keys(self):
+        return list(set(dict.keys(self)).union(self.__dict_keys__))
 
     def __getitem__(self, key):
         if key in dict.keys(self):
@@ -20,23 +18,29 @@ class propdict(dict):
         else:
             return getattr(self, key)
 
-    def keys(self):
-        return list(set(dict.keys(self)).union(self.__dict_keys__))
-
-    @property
-    def __dict__(self):
-        return dict(self.items())
+    def __getattribute__(self, name):
+        try:
+            return dict.__getitem__(self, name)
+        except KeyError:
+            return object.__getattribute__(self, name)
 
     def __setattr__(self, name, value):
         if name in dir(self) and not name in self.keys():
             raise TypeError("cannot overwrite existing method")
         self[name] = value
 
-    def __getattribute__(self, name):
-        try:
-            return dict.__getitem__(self, name)
-        except KeyError:
-            return object.__getattribute__(self, name)
+    def __repr__(self):
+        r = ["{0!r}: {1!r}".format(k, v) for k, v in self.items()]
+        return "propdict({" + ", ".join(r) + "})"
+
+    @property
+    def __dict__(self):
+        return dict(self.items())
+
+    def __contains__(self, name):
+        return name in self.keys()
+
+    has_key = __contains__
 
     def items(self):
         return [(key, self[key]) for key in self.keys()]
@@ -52,10 +56,6 @@ class propdict(dict):
             return self[key]
         except AttributeError:
             return default
-
-    def __repr__(self):
-        r = ["{0!r}: {1!r}".format(k, v) for k, v in self.items()]
-        return "propdict({" + ", ".join(r) + "})"
 
     def __ne__(self, other):
         return not self.__eq__(other)
