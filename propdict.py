@@ -25,7 +25,7 @@ class propdict(dict):
 
     @property
     def __dict__(self):
-        return self
+        return dict(self.items())
 
     def __setattr__(self, name, value):
         if name in dir(self) and not name in self.keys():

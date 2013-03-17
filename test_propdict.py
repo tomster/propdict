@@ -103,6 +103,10 @@ def test_set_method(host):
         host.notindict = u'foo'
 
 
+def test__dict__(host):
+    assert host.__dict__ == {'use_zfs': True, 'netmask': '127.0.0.2 255.255.255.0', 'ip_addr': '127.0.0.2', 'jailzfs': 'jails/ezjail'}
+
+
 def test_set_builtin_method(host):
     with raises(TypeError):
         host.__getattribute__ = u'foo'
