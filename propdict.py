@@ -42,11 +42,23 @@ class propdict(dict):
 
     has_key = __contains__
 
+    def iterkeys(self):
+        for key in self.keys():
+            yield key
+
     def items(self):
         return [(key, self[key]) for key in self.keys()]
 
+    def iteritems(self):
+        for key in self.iterkeys():
+            yield (key, self[key])
+
     def values(self):
         return [self[key] for key in self.keys()]
+
+    def itervalues(self):
+        for key in self.iterkeys():
+            yield self[key]
 
     def __len__(self):
         return len(self.keys())

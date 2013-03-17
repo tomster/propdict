@@ -59,12 +59,20 @@ def test_prop_keys(host):
     assert 'netmask' in host.keys()
 
 
+def test_prop_iterkeys(host):
+    assert 'netmask' in host.iterkeys()
+
+
 def test_property_access(host, netmask):
     assert host.netmask == netmask
 
 
 def test_property_in_items(host, netmask):
     assert ('netmask', netmask) in host.items()
+
+
+def test_property_in_iteritems(host, netmask):
+    assert ('netmask', netmask) in host.iteritems()
 
 
 def test_property_as_dict(host):
@@ -164,6 +172,10 @@ def test_update(host, netmask):
 
 def test_values(host, netmask):
     assert netmask in host.values()
+
+
+def test_itervalues(host, netmask):
+    assert netmask in host.itervalues()
 
 
 def test_has_key(host):
