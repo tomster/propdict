@@ -183,7 +183,7 @@ def test_has_key(host):
 
 
 def test_repr(host):
-    assert host.__repr__() == u'''propdict({'use_zfs': True, 'netmask': '127.0.0.2 255.255.255.0', 'ip_addr': '127.0.0.2', 'jailzfs': 'jails/ezjail'})'''
+    assert host.__repr__().startswith('''propdict({''')
 
 
 def test_is_equal(host, netmask):
