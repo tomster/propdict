@@ -1,6 +1,9 @@
 A Python dictionary implementation that supports properties, class variables and inheritance for your sophisticated templating needs.
 
-.. image:: https://travis-ci.org/tomster/propdict.png (tested for Python 2.6, 2.7 and 3.3)
+|travis_status| tested for Python 2.6, 2.7 and 3.3
+
+.. |travis_status| image:: https://travis-ci.org/tomster/propdict.png
+
 
 Motivation
 ==========
