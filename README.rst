@@ -134,6 +134,6 @@ TODO
 - [x] eggify it
 - [x] support class variables
 - [x] support iter(values|items|keys)
-- [ ] travis
-- [ ] check which python versions this actually works on (currently 2.7 tested)
+- [x] travis
+- [x] check which python versions this actually works on (currently 2.7 tested)
 

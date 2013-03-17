@@ -1,9 +1,16 @@
+import sys
+
+if sys.version_info[0] >= 3:  # pragma: no cover
+    DICT_KEYS = [str, bool, int, float, dict, list, tuple, property]
+else:  # pragma: no cover
+    DICT_KEYS = [str, bool, int, float, unicode, dict, list, tuple, property]
+
+
 class propdict(dict):
 
     def __new__(cls, **kw):
         cls.__dict_keys__ = set([name for name in dir(cls)
-            if not name.startswith('_') and (type(getattr(cls, name)) in [
-                str, bool, int, float, unicode, dict, list, tuple, property] or getattr(cls, name) is None)])
+            if not name.startswith('_') and (type(getattr(cls, name)) in DICT_KEYS or getattr(cls, name) is None)])
         return dict.__new__(cls, **kw)
 
     def keys(self):
