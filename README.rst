@@ -1,5 +1,7 @@
 A Python dictionary implementation that supports properties, class variables and inheritance for your sophisticated templating needs.
 
+.. image:: https://travis-ci.org/tomster/propdict.png
+
 Motivation
 ==========
 
