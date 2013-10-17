@@ -9,7 +9,8 @@ else:  # pragma: no cover
 class propdict(dict):
 
     def __new__(cls, **kw):
-        cls.__dict_keys__ = set([name for name in dir(cls)
+        cls.__dict_keys__ = set([
+            name for name in dir(cls)
             if not name.startswith('_') and (type(getattr(cls, name)) in DICT_KEYS or getattr(cls, name) is None)])
         return dict.__new__(cls, **kw)
 

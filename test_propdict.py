@@ -3,7 +3,7 @@ from propdict import propdict
 
 config = {
     'jailzfs': 'jails/ezjail',
-    'ip_addr':  '127.0.0.2',
+    'ip_addr': '127.0.0.2',
 }
 
 
@@ -179,7 +179,7 @@ def test_itervalues(host, netmask):
 
 
 def test_has_key(host):
-    assert host.has_key('netmask')
+    assert 'netmask' in host
 
 
 def test_repr(host):
