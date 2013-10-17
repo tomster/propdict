@@ -22,6 +22,9 @@ setup(
     zip_safe=False,
     install_requires=[],
     extras_require={
-        "tests": ['pytest-cov'],
+        "tests": [
+            'pytest-cov',
+            'pytest-flakes',
+            'pytest-pep8'],
     },
     py_modules=['propdict'])
