@@ -24,4 +24,4 @@ setup(
     extras_require={
         "tests": ['pytest-cov'],
     },
-    packages=[])
+    py_modules=['propdict'])

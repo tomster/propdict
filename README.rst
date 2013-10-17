@@ -142,6 +142,12 @@ If you made some changes and want to know whether you broke coverage::
 Changelog
 =========
 
+1.1 - Unreleased
+----------------
+
+- Packaging fix
+
+
 1.0 - 2013-10-17
 ----------------
 
