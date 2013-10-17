@@ -3,7 +3,7 @@ import sys
 if sys.version_info[0] >= 3:  # pragma: no cover
     DICT_KEYS = [str, bool, int, float, dict, list, tuple, property]
 else:  # pragma: no cover
-    DICT_KEYS = [str, bool, int, float, unicode, dict, list, tuple, property]
+    DICT_KEYS = [str, bool, int, float, __builtins__['unicode'], dict, list, tuple, property]
 
 
 class propdict(dict):
