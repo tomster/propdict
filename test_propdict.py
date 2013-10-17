@@ -31,6 +31,13 @@ def netmask(host):
     return '%s 255.255.255.0' % host.ip_addr
 
 
+def test_from_dict():
+    pd = propdict({'a': 1})
+    assert pd.items() == [('a', 1)]
+    assert pd['a'] == 1
+    assert pd.a == 1
+
+
 def test_dict_from_class(host):
     assert host['ip_addr'] == config['ip_addr']
 

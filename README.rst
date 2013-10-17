@@ -146,6 +146,7 @@ Changelog
 ----------------
 
 - Packaging fix
+- Support dict in constructor
 
 
 1.0 - 2013-10-17
