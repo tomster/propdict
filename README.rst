@@ -15,6 +15,50 @@ Overriding a specific behavior of a class is easy: create a subclass (or even ju
 A consumer of the template can then simply subclass the `propdict` based data, override the specific aspects and leave the template as-is.
 
 
+Basic Features
+==============
+
+``propdict`` instances behave almost exactly as a regular dictionary, except that you can access values using the dict notation or attribute notation:
+
+    >>> server_foo.ip_addr
+    '10.0.0.1'
+    >>> server_foo['ip_addr']
+    '10.0.0.1'
+
+    >>> print server_foo['ifconfig']
+    ifconfig_em0="inet 10.0.0.1 netmask 255.255.255.0"
+
+    >>> print server_foo.ifconfig
+    ifconfig_em0="inet 10.0.0.1 netmask 255.255.255.0"
+
+The same works also for assignment:
+
+    >>> server_foo.ip_addr = '192.168.1.1'
+    >>> print server_foo.ip_addr
+    192.168.1.1
+
+    >>> server_foo['ip_addr'] = '127.0.0.1'
+    >>> print server_foo.ip_addr
+    127.0.0.1
+
+Assignment also works for changing properties, of course, as you saw in the example:
+
+    >>> server_foo.ifconfig = u'foo mask'
+    >>> print server_foo.ifconfig
+    foo mask
+
+It is noteworthy, though, that you cannot delete properties. However, you *can* delete custom *values* of properties, but that just re-exposes their original value:
+
+    >>> del server_foo['ifconfig']
+    >>> print server_foo.ifconfig
+    ifconfig_em0="inet 127.0.0.1 netmask 255.255.255.0"
+
+    >>> del server_foo['ifconfig']
+    Traceback (most recent call last):
+    ...
+    KeyError: 'ifconfig'
+
+
 Example
 ======= 
 
@@ -67,50 +111,6 @@ Notice, how the new definition of ``ifconfig`` contains a new value for the inte
     ifconfig_em1="inet 10.0.0.2 netmask 255.255.0.0"
 
 So, we were able to provide an arbitrary new value for the ``ifconfig`` key by changing just that and without touching the template, while still keeping the default behavior (it's automatically computed for you from the interface and IP address).
-
-
-Basic Features
-==============
-
-``propdict`` instances behave almost exactly as a regular dictionary, except that you can access values using the dict notation or attribute notation:
-
-    >>> server_foo.ip_addr
-    '10.0.0.1'
-    >>> server_foo['ip_addr']
-    '10.0.0.1'
-
-    >>> print server_foo['ifconfig']
-    ifconfig_em0="inet 10.0.0.1 netmask 255.255.255.0"
-
-    >>> print server_foo.ifconfig
-    ifconfig_em0="inet 10.0.0.1 netmask 255.255.255.0"
-
-The same works also for assignment:
-
-    >>> server_foo.ip_addr = '192.168.1.1'
-    >>> print server_foo.ip_addr
-    192.168.1.1
-
-    >>> server_foo['ip_addr'] = '127.0.0.1'
-    >>> print server_foo.ip_addr
-    127.0.0.1
-
-Assignment also works for changing properties, of course, as you saw in the example:
-
-    >>> server_foo.ifconfig = u'foo mask'
-    >>> print server_foo.ifconfig
-    foo mask
-
-It is noteworthy, though, that you cannot delete properties. However, you *can* delete custom *values* of properties, but that just re-exposes their original value:
-
-    >>> del server_foo['ifconfig']
-    >>> print server_foo.ifconfig
-    ifconfig_em0="inet 127.0.0.1 netmask 255.255.255.0"
-
-    >>> del server_foo['ifconfig']
-    Traceback (most recent call last):
-    ...
-    KeyError: 'ifconfig'
 
 
 Installation
