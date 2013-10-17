@@ -1,5 +1,5 @@
 from setuptools import setup
-version = '0.1a1'
+version = '1.0'
 
 setup(
     version=version,
@@ -7,7 +7,7 @@ setup(
     description='A Python dictionary implementation that supports properties, class variables and inheritance for your sophisticated templating needs.',
     long_description=open('README.rst').read(),
     classifiers=[
-        "Development Status :: 3 - Alpha",
+        "Development Status :: 5 - Production/Stable",
         "License :: OSI Approved :: BSD License",
         "Intended Audience :: Developers",
         "License :: OSI Approved :: BSD License",

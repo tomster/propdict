@@ -142,6 +142,12 @@ If you made some changes and want to know whether you broke coverage::
 Changelog
 =========
 
+1.0 - 2013-10-17
+----------------
+
+After several months in production, released the identical code as stable.
+
+
 0.1a1 - 2013-03-17
 ------------------
 
