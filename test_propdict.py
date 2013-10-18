@@ -3,7 +3,7 @@ from propdict import propdict
 
 config = {
     'jailzfs': 'jails/ezjail',
-    'ip_addr':  '127.0.0.2',
+    'ip_addr': '127.0.0.2',
 }
 
 
@@ -29,6 +29,13 @@ def host(request):
 @fixture
 def netmask(host):
     return '%s 255.255.255.0' % host.ip_addr
+
+
+def test_from_dict():
+    pd = propdict({'a': 1})
+    assert pd.items() == [('a', 1)]
+    assert pd['a'] == 1
+    assert pd.a == 1
 
 
 def test_dict_from_class(host):
@@ -179,7 +186,7 @@ def test_itervalues(host, netmask):
 
 
 def test_has_key(host):
-    assert host.has_key('netmask')
+    assert 'netmask' in host
 
 
 def test_repr(host):

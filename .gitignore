@@ -1,4 +1,6 @@
+/.cache
 /.coverage
+/.tox
 /lib
 /bin
 /include
