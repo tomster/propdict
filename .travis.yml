@@ -3,5 +3,7 @@ python:
   - "3.3"
   - "2.7"
   - "2.6"
+install:
+  - python setup.py develop easy_install propdict[tests]
 # command to run tests, e.g. python setup.py test
-script:  py.test
+script:  py.test test_*
