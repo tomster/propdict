@@ -142,11 +142,11 @@ If you made some changes and want to know whether you broke coverage::
 Changelog
 =========
 
-1.1 - Unreleased
-----------------
+1.1 - 201310-18
+---------------
 
-- Packaging fix
-- Support dict in constructor
+- Packaging fix [fschulze]
+- Support dict in constructor [fschulze]
 
 
 1.0 - 2013-10-17
