@@ -145,6 +145,7 @@ Changelog
 1.2 - Unreleased
 ----------------
 
+- Support propdict in constructor [tomster]
 
 
 1.1 - 201310-18

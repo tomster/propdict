@@ -38,6 +38,16 @@ def test_from_dict():
     assert pd.a == 1
 
 
+def test_from_propdict(host):
+    from_pd = propdict(host)
+    # the result is equal...
+    assert from_pd == host
+    # but not identical
+    assert not(from_pd is host)
+    # additional check to assert that properties have been preserved, too:
+    assert from_pd.netmask == host.netmask
+
+
 def test_dict_from_class(host):
     assert host['ip_addr'] == config['ip_addr']
 
