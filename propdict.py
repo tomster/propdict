@@ -53,6 +53,8 @@ class propdict(dict):
         for key in self.keys():
             yield key
 
+    __iter__ = iterkeys
+
     def items(self):
         return [(key, self[key]) for key in self.keys()]
 

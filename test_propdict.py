@@ -199,6 +199,10 @@ def test_has_key(host):
     assert 'netmask' in host
 
 
+def test_property_in_iter(host):
+    assert 'netmask' in list(host)
+
+
 def test_repr(host):
     assert host.__repr__().startswith('''propdict({''')
 

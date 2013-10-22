@@ -145,6 +145,7 @@ Changelog
 1.2 - Unreleased
 ----------------
 
+- Include properties in ``__iter__`` [tomster]
 - Support propdict in constructor [tomster]
 
 
