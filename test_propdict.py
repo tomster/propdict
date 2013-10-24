@@ -124,8 +124,9 @@ def test_set_property(host):
 
 
 def test_set_method(host):
-    with raises(TypeError):
-        host.notindict = u'foo'
+    # you can overwrite a method with a value
+    host.notindict = u'foo'
+    assert host.notindict == u'foo'
 
 
 def test__dict__(host):
@@ -133,8 +134,8 @@ def test__dict__(host):
 
 
 def test_set_builtin_method(host):
-    with raises(TypeError):
-        host.__getattribute__ = u'foo'
+    host.__getattribute__ = u'foo'
+    assert host.__getattribute__ == u'foo'
 
 
 def test_get_property(host, netmask):

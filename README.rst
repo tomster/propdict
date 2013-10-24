@@ -145,6 +145,8 @@ Changelog
 1.2 - Unreleased
 ----------------
 
+- Allow overwriting methods with values.
+  The test for this would lead to recursion errors and/or be very expensive. [tomster]
 - Include properties in ``__iter__`` [tomster]
 - Support propdict in constructor [tomster]
 
